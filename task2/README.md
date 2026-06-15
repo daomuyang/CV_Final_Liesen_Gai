@@ -39,27 +39,28 @@ task2/
     ├── eval_*_on_*.json
     ├── report_*.json
     └── logs/
-```
 
-# 1. 环境（GPU 服务器）
+## 主要操作
+```bash
+### 1. 环境（GPU 服务器）
 bash scripts/setup_server.sh
 conda activate cv_hw3_task2
 
-# 2. 数据：从网盘解压五个 calvin_env_* 到 data/（见下文）
+### 2. 数据：从网盘解压五个 calvin_env_* 到 data/（见下文）
 python scripts/verify_dataset.py
 
-# 3. 权重：从网盘解压到 outputs/（见下文「最优模型」）
-# 若只有 080000，需为评测脚本创建 last 软链接：
+### 3. 权重：从网盘解压到 outputs/（见下文「最优模型」）
+若只有 080000，需为评测脚本创建 last 软链接：
 ln -sfn 080000 outputs/train_b/checkpoints/last
 ln -sfn 080000 outputs/train_abc_fair/checkpoints/last
 
-# 4. 测试（无需重新训练）
+### 4. 测试（无需重新训练）
 export SEED=42
 bash scripts/eval_report.sh B server
 bash scripts/eval_report.sh ABC_fair server
 bash scripts/eval_compare.sh B ABC_fair
 
-# 5. 重新训练（如需要）
+### 5. 重新训练（如需要）
 bash scripts/train.sh B server
 bash scripts/train.sh ABC_fair server
 ```
@@ -77,7 +78,7 @@ task2/outputs/
 ├── train_b/checkpoints/
 │   ├── 080000/                          # 最优步
 │   │   └── pretrained_model/            # ★ 完整目录，7 个文件
-│   └── last/                            # 评测脚本读取此目录（内容与 080000 相同）
+│   └── last/                            # 评测脚本读取此目录（内容与 080000 相同，需为评测脚本创建 last 软链接）
 │       └── pretrained_model/
 └── train_abc_fair/checkpoints/
     ├── 080000/
@@ -109,7 +110,7 @@ ls outputs/train_abc_fair/checkpoints/last/pretrained_model/model.safetensors
 
 ## 环境配置
 
-| 项目 | 值 |
+| 项目 | 版本 |
 |------|-----|
 | Python | 3.12 |
 | PyTorch | 2.10.0 + CUDA 12.1（服务器） |
