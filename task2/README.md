@@ -16,6 +16,8 @@ task2/
 ├── environment-server.yml    # 同 environment.yml
 ├── requirements-server.txt   # 服务器 pip 依赖（lerobot 等）
 ├── requirements-local.txt    # 本地 pip 依赖
+├── grad_norm.csv             # WandB 导出的 train/grad_norm 数据（B 与 ABC_fair）
+├── kld_loss.csv              # WandB 导出的 train/kld_loss 数据（B 与 ABC_fair）
 ├── data/                     # 数据集（见「数据准备」）
 │   ├── calvin_env_A/
 │   ├── calvin_env_B/
@@ -72,14 +74,14 @@ macOS 本地仅做冒烟：`bash scripts/setup_local.sh && bash scripts/run_smok
 
 ## 最优模型：放置位置与格式
 
-网盘下载后，**必须保持以下目录结构**（仅 `model.safetensors` 无法评测）：
+网盘下载后，**必须保持以下目录结构**（仅 `model.safetensors` 无法评测）。注意：请在保留GitHub上下载的outputs文件夹中内容的基础上，加入网盘上下载的outputs/train_b和outputs/train_abc_fair文件夹，请勿直接覆盖GitHub上的outputs文件夹。
 
 ```
 task2/outputs/
 ├── train_b/checkpoints/
 │   ├── 080000/                          # 最优步
 │   │   └── pretrained_model/            # ★ 完整目录，7 个文件
-│   └── last/                            # 评测脚本读取此目录（内容与 080000 相同，需为评测脚本创建 last 软链接）
+│   └── last/                            # 评测脚本读取此目录（内容与 080000 相同，需为评测脚本创建 last 软链接，具体方式见“主要操作”中的指令）
 │       └── pretrained_model/
 └── train_abc_fair/checkpoints/
     ├── 080000/
