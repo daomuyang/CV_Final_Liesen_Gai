@@ -67,10 +67,22 @@ activate_venv() {
   if [[ -f "${TASK2_ROOT}/.venv/bin/activate" ]]; then
     # shellcheck disable=SC1091
     source "${TASK2_ROOT}/.venv/bin/activate"
-  else
-    echo "Virtualenv not found. Run: bash scripts/setup_local.sh (or setup_server.sh)" >&2
-    exit 1
+    return
   fi
+
+  if command -v conda >/dev/null 2>&1; then
+    # shellcheck disable=SC1091
+    source "$(conda info --base)/etc/profile.d/conda.sh"
+    if conda env list | awk '{print $1}' | grep -qx "cv_hw3_task2"; then
+      conda activate cv_hw3_task2
+      return
+    fi
+  fi
+
+  echo "Python env not found." >&2
+  echo "  macOS/local: bash scripts/setup_local.sh && source .venv/bin/activate" >&2
+  echo "  GPU server:  bash scripts/setup_server.sh" >&2
+  exit 1
 }
 
 latest_checkpoint() {

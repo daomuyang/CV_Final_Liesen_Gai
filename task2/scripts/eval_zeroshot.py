@@ -185,13 +185,19 @@ def run_eval(
         raise FileNotFoundError(f"Missing pretrained_model under {checkpoint}")
 
     policy_cfg = PreTrainedConfig.from_pretrained(ckpt_dir)
+    policy_cfg.device = str(torch_device)
     policy_cls = get_policy_class(policy_cfg.type)
     policy = policy_cls.from_pretrained(ckpt_dir)
     policy.to(torch_device)
     policy.eval()
 
+    preprocessor_overrides = {
+        "device_processor": {"device": str(torch_device)},
+    }
     preprocessor, _postprocessor = make_pre_post_processors(
-        policy_cfg, pretrained_path=str(ckpt_dir)
+        policy_cfg,
+        pretrained_path=str(ckpt_dir),
+        preprocessor_overrides=preprocessor_overrides,
     )
 
     eval_root = eval_root.resolve()
@@ -264,7 +270,7 @@ def run_eval(
             "chunk_step_l1: mean per-frame L1 at each step within the predicted action chunk "
             "(measures Action Chunking horizon degradation). "
             "chunk_horizon_degradation = last_step_l1 / first_step_l1 (>1 means error grows with horizon). "
-            "For homework Success Rate (task-level), see docs/calvin_sim_setup.md."
+            "success_rate_t* are strict per-frame L1 thresholds, not CALVIN task-level success rates."
         ),
     }
 

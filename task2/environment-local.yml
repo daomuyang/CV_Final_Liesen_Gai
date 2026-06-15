@@ -1,0 +1,15 @@
+# macOS 本地冒烟环境（CPU/MPS，不用于完整 80k 训练）
+# 用法: conda env create -f environment-local.yml
+#       conda activate cv_hw3_task2_local
+name: cv_hw3_task2_local
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - torch==2.10.0
+      - torchvision==0.25.0
+      - -r requirements-local.txt

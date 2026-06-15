@@ -11,7 +11,7 @@ nvidia-smi || echo "WARN: nvidia-smi not available"
 
 if command -v conda >/dev/null 2>&1; then
   echo "Using conda env from environment-server.yml"
-  conda env update -f environment-server.yml --prune -y || conda env create -f environment-server.yml -y
+  conda env update -f environment.yml --prune -y || conda env create -f environment.yml -y
   # shellcheck disable=SC1091
   source "$(conda info --base)/etc/profile.d/conda.sh"
   conda activate cv_hw3_task2
@@ -39,6 +39,6 @@ echo "=== Training commands ==="
 echo "  bash scripts/train.sh A server"
 echo "  bash scripts/train.sh B server"
 echo "  bash scripts/train.sh ABC_fair server   # 80k steps (ABC mixed)"
-echo "  bash scripts/eval_zeroshot.sh B server"
-echo "  bash scripts/eval_zeroshot.sh ABC_fair server"
-echo "  See docs/experiments.md and docs/calvin_sim_setup.md"
+echo "  bash scripts/eval_report.sh B server"
+echo "  bash scripts/eval_report.sh ABC_fair server"
+echo "  See README.md"

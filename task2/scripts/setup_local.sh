@@ -19,6 +19,7 @@ fi
 source .venv/bin/activate
 
 pip install -U pip wheel
+pip install torch==2.10.0 torchvision==0.25.0
 pip install -r requirements-local.txt
 
 echo "Local env ready. Activate with: source .venv/bin/activate"

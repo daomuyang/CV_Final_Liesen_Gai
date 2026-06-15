@@ -1,5 +1,6 @@
-# 兼容旧引用：内容与 environment.yml 相同
-# 推荐直接使用: conda env create -f environment.yml
+# GPU 服务器（CUDA）推荐环境
+# 用法: conda env create -f environment.yml
+#       conda activate cv_hw3_task2
 name: cv_hw3_task2
 channels:
   - pytorch
