@@ -1,6 +1,4 @@
-# 兼容旧引用：内容与 environment.yml 相同
-# 推荐直接使用: conda env create -f environment.yml
-name: cv_hw3_task2
+name: cv_hw3_task2_server
 channels:
   - pytorch
   - nvidia
