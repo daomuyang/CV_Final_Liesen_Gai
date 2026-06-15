@@ -18,6 +18,7 @@ task2/
 ├── requirements-local.txt    # 本地 pip 依赖
 ├── grad_norm.csv             # WandB 导出的 train/grad_norm 数据（B 与 ABC_fair）
 ├── kld_loss.csv              # WandB 导出的 train/kld_loss 数据（B 与 ABC_fair）
+├── l1_loss.csv              # WandB 导出的 train/l1_loss 数据（B 与 ABC_fair）
 ├── data/                     # 数据集（见「数据准备」）
 │   ├── calvin_env_A/
 │   ├── calvin_env_B/
