@@ -9,7 +9,7 @@
 | **GitHub** | 代码（`scripts/`、`third_party/`、`patches/`）、`outputs/timing.csv`、`outputs/data/` |
 | **百度网盘** | 整个 `submission_assets/` 文件夹（全部输入 + 输出数据，约 8.8 GB） |
 
-网盘链接与提取码：（待填）
+网盘链接与提取码：https://pan.baidu.com/s/1dlkCUwM8b2_L2cgbFi3RKA?pwd=stq2 提取码：stq2
 
 流水线脚本通过 `DATASET_ROOT=submission_assets/` 读写数据（见 `scripts/common.sh`）。
 
