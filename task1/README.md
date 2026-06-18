@@ -151,18 +151,3 @@ bash scripts/pipeline/background.sh garden
 
 读取 `submission_assets/garden/`（`sparse/` + `images/`）；mesh 输出：`garden/2dgs_output/train/ours_10000/fuse_unbounded_post.ply`。
 
----
-
-## 提交清单
-
-| 项目 | 位置 |
-|------|------|
-| GitHub | `task1/` 代码 + `outputs/` |
-| 百度网盘 | `submission_assets/` + `third_party/` |
-| 报告 PDF | 含网络结构、超参、Loss、WandB 曲线 |
-
----
-
-## 作者
-
-盖烈森 · 23307130013@m.fudan.edu.cn
