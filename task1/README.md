@@ -7,7 +7,7 @@
 | 渠道 | 内容 |
 |------|------|
 | **GitHub** | 代码（`scripts/`、`third_party/`、`patches/`）、`outputs/timing.csv`、`outputs/data/` |
-| **百度网盘** | 整个 `submission_assets/` 文件夹（全部输入 + 输出数据，约 8.8 GB） |
+| **百度网盘** | 整个 `submission_assets/` 文件夹（全部输入 + 输出数据，约 8.8 GB）、整个`third_party`文件夹（全部第三方库，约 200 MB） |
 
 网盘链接与提取码：https://pan.baidu.com/s/1dlkCUwM8b2_L2cgbFi3RKA?pwd=stq2 提取码：stq2
 
