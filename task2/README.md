@@ -2,7 +2,12 @@
 
 基于 LeRobot **ACT**，完成 B 单环境训练、ABC 混合训练（80k 步）与 D 环境 Zero-shot 离线评测。
 
-**说明**：虚拟环境（`.venv` / conda）未随仓库上传，需在本地按下文重建。数据集与最优模型权重见百度网盘（链接与提取码见 `report_task2.pdf`）。
+**说明**：虚拟环境（`.venv` / conda）未随仓库上传，需在本地按下文重建。数据集与最优模型权重见百度网盘。
+
+网盘链接：https://pan.baidu.com/s/1dlkCUwM8b2_L2cgbFi3RKA?pwd=stq2  
+提取码：`stq2`
+
+（题目一、题目二数据与权重均在该网盘中。）
 
 ---
 
@@ -16,9 +21,8 @@ task2/
 ├── environment-server.yml    # 同 environment.yml
 ├── requirements-server.txt   # 服务器 pip 依赖（lerobot 等）
 ├── requirements-local.txt    # 本地 pip 依赖
-├── grad_norm.csv             # WandB 导出的 train/grad_norm 数据（B 与 ABC_fair）
-├── kld_loss.csv              # WandB 导出的 train/kld_loss 数据（B 与 ABC_fair）
-├── l1_loss.csv              # WandB 导出的 train/l1_loss 数据（B 与 ABC_fair）
+├── grad_norm.csv             # WandB 导出的 train/grad_norm 曲线（B 与 ABC_fair）
+├── kld_loss.csv              # WandB 导出的 train/kld_loss 曲线（B 与 ABC_fair）
 ├── data/                     # 数据集（见「数据准备」）
 │   ├── calvin_env_A/
 │   ├── calvin_env_B/
@@ -44,27 +48,28 @@ task2/
     └── logs/
 ```
 
-## 主要操作
+## 老师快速复现
+
 ```bash
-### 1. 环境（GPU 服务器）
+# 1. 环境（GPU 服务器）
 bash scripts/setup_server.sh
 conda activate cv_hw3_task2
 
-### 2. 数据：从网盘解压五个 calvin_env_* 到 data/（见下文）
+# 2. 数据：从网盘解压五个 calvin_env_* 到 data/（见下文）
 python scripts/verify_dataset.py
 
-### 3. 权重：从网盘解压到 outputs/（见下文「最优模型」）
-若只有 080000，需为评测脚本创建 last 软链接：
+# 3. 权重：从网盘解压到 outputs/（见下文「最优模型」）
+# 若只有 080000，需为评测脚本创建 last 软链接：
 ln -sfn 080000 outputs/train_b/checkpoints/last
 ln -sfn 080000 outputs/train_abc_fair/checkpoints/last
 
-### 4. 测试（无需重新训练）
+# 4. 测试（无需重新训练）
 export SEED=42
 bash scripts/eval_report.sh B server
 bash scripts/eval_report.sh ABC_fair server
 bash scripts/eval_compare.sh B ABC_fair
 
-### 5. 重新训练（如需要）
+# 5. 重新训练（如需要）
 bash scripts/train.sh B server
 bash scripts/train.sh ABC_fair server
 ```
@@ -75,14 +80,14 @@ macOS 本地仅做冒烟：`bash scripts/setup_local.sh && bash scripts/run_smok
 
 ## 最优模型：放置位置与格式
 
-网盘下载后，**必须保持以下目录结构**（仅 `model.safetensors` 无法评测）。注意：请在保留GitHub上下载的outputs文件夹中内容的基础上，加入网盘上下载的outputs/train_b和outputs/train_abc_fair文件夹，请勿直接覆盖GitHub上的outputs文件夹。
+网盘下载后，**必须保持以下目录结构**（仅 `model.safetensors` 无法评测）。注意：请在保留GitHub上下载的outputs文件夹中内容的基础上，加入网盘上下载的outputs/train_b和outputs/train_abc_fair文件夹，请勿直接覆盖GitHub上的outputs文件夹
 
 ```
 task2/outputs/
 ├── train_b/checkpoints/
 │   ├── 080000/                          # 最优步
 │   │   └── pretrained_model/            # ★ 完整目录，7 个文件
-│   └── last/                            # 评测脚本读取此目录（内容与 080000 相同，需为评测脚本创建 last 软链接，具体方式见“主要操作”中的指令）
+│   └── last/                            # 评测脚本读取此目录（内容与 080000 相同）
 │       └── pretrained_model/
 └── train_abc_fair/checkpoints/
     ├── 080000/
@@ -114,7 +119,7 @@ ls outputs/train_abc_fair/checkpoints/last/pretrained_model/model.safetensors
 
 ## 环境配置
 
-| 项目 | 版本 |
+| 项目 | 值 |
 |------|-----|
 | Python | 3.12 |
 | PyTorch | 2.10.0 + CUDA 12.1（服务器） |
@@ -219,4 +224,4 @@ bash scripts/diagnose.sh ABC_fair
 重新训练前：`rm -rf outputs/train_b`
 
 **`ModuleNotFoundError: lerobot`**  
-重新执行环境配置并 `conda activate cv_hw3_task2` 或 `source .venv/bin/activate`
+重新执行环境配置并 ` activcondaate cv_hw3_task2` 或 `source .venv/bin/activate`
