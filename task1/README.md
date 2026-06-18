@@ -6,16 +6,56 @@
 
 | 渠道 | 内容 |
 |------|------|
-| **GitHub** | 代码（`scripts/`、`third_party/`、`patches/`）、`outputs/timing.csv`、`outputs/data/` |
-| **百度网盘** | 整个 `submission_assets/` 文件夹（全部输入 + 输出数据，约 8.8 GB）、整个`third_party`文件夹（全部第三方库，约 200 MB） |
+| **GitHub** | 代码（`scripts/`、`patches/`）、`environment.yml`、`outputs/timing.csv`、`outputs/data/` |
+| **百度网盘** | `submission_assets/`（全部输入 + 输出数据，约 8.8 GB）、`third_party/`（全部第三方库，约 200 MB） |
 
-网盘链接与提取码：https://pan.baidu.com/s/1dlkCUwM8b2_L2cgbFi3RKA?pwd=stq2 提取码：stq2
+网盘链接：https://pan.baidu.com/s/1dlkCUwM8b2_L2cgbFi3RKA?pwd=stq2  
+提取码：`stq2`
 
-流水线脚本通过 `DATASET_ROOT=submission_assets/` 读写数据（见 `scripts/common.sh`）。
+流水线脚本通过 `DATASET_ROOT=submission_assets/` 读写数据，通过 `THIRD_PARTY_DIR=third_party/` 调用第三方库（见 `scripts/common.sh`）。
 
 ---
 
-## 目录结构（`submission_assets/`）
+## 仓库结构（GitHub）
+
+以下为 GitHub 仓库中的 `task1/` 目录结构（不含网盘提供的 `submission_assets/` 与 `third_party/`）：
+
+```
+task1/
+├── README.md
+├── environment.yml              # Conda 环境（cvpj1）
+├── patches/                     # 对第三方库的补丁
+│   ├── 2d-gaussian-splatting-alpha-mask.patch
+│   └── Magic123-wandb.patch
+├── scripts/
+│   ├── common.sh                # 路径常量、公共函数
+│   ├── setup_server.sh          # 服务器环境安装
+│   ├── timing.sh                # 墙钟计时
+│   ├── wandb.sh                 # WandB 离线日志
+│   ├── pipeline/                # 四条流水线入口
+│   │   ├── object_a.sh          # 物体 A：COLMAP + 2DGS
+│   │   ├── object_b.sh          # 物体 B：threestudio SDS
+│   │   ├── object_c.sh          # 物体 C：Magic123
+│   │   └── background.sh        # 背景：garden + 2DGS
+│   └── tools/
+│       ├── preprocess_image.py
+│       ├── plot_magic123_loss.py
+│       ├── log_metrics_to_wandb.py
+│       ├── blender_vertex_color.py
+│       └── run_blender_color.sh
+└── outputs/
+    ├── timing.csv               # 各阶段墙钟耗时
+    └── data/                    # 训练指标 CSV（供报告/WandB）
+        ├── twodgs:*.csv
+        ├── dreamfusion:loss_*.csv
+        └── magic123:loss_*.csv
+```
+
+网盘中的 `third_party/` 包含：`2d-gaussian-splatting`、`colmap`、`Magic123`、`threestudio`。
+
+---
+
+## 网盘数据目录（`submission_assets/`）
 
 ```
 submission_assets/
@@ -62,7 +102,9 @@ cd task1
 bash scripts/setup_server.sh
 conda activate cvpj1
 
-# 2. 下载百度网盘，将 submission_assets/ 解压到 task1/submission_assets/
+# 2. 下载百度网盘，解压到 task1/ 下：
+#    submission_assets/  → task1/submission_assets/
+#    third_party/        → task1/third_party/
 
 # 3. 查看结果（无需重训）
 #    物体 A mesh : submission_assets/object_A/2dgs_output/train/ours_10000/fuse_post.ply
@@ -79,7 +121,7 @@ bash scripts/pipeline/object_c.sh
 bash scripts/pipeline/background.sh garden
 ```
 
-**仅查看融合场景**：解压网盘后打开 `scene_compose.blend` 与 `wandering.mov` 即可。
+**仅查看融合场景**：解压网盘后打开 `scene_compose.blend` 与 `wandering.mov` 即可（仍需 `third_party/` 若需重训）。
 
 ---
 
@@ -116,7 +158,7 @@ bash scripts/pipeline/background.sh garden
 | 项目 | 位置 |
 |------|------|
 | GitHub | `task1/` 代码 + `outputs/` |
-| 百度网盘 | 整个 `submission_assets/` |
+| 百度网盘 | `submission_assets/` + `third_party/` |
 | 报告 PDF | 含网络结构、超参、Loss、WandB 曲线 |
 
 ---
