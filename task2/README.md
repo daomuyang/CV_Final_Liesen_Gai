@@ -53,7 +53,7 @@ task2/
 ```bash
 # 1. 环境（GPU 服务器）
 bash scripts/setup_server.sh
-conda activate cv_hw3_task2
+conda activate task2
 
 # 2. 数据：从网盘解压五个 calvin_env_* 到 data/（见下文）
 python scripts/verify_dataset.py
@@ -130,8 +130,8 @@ ls outputs/train_abc_fair/checkpoints/last/pretrained_model/model.safetensors
 
 ```bash
 cd task2
-bash scripts/setup_server.sh    # 读取 environment.yml，创建 cv_hw3_task2
-conda activate cv_hw3_task2
+bash scripts/setup_server.sh    # 读取 environment.yml，创建 task2
+conda activate task2
 ```
 
 ### GPU 服务器（venv）
@@ -154,7 +154,7 @@ bash scripts/setup_local.sh && source .venv/bin/activate
 
 验证：`python -c "import lerobot, torch; print(lerobot.__version__, torch.__version__)"`
 
-所有 `scripts/*.sh` 会自动激活 `.venv` 或 conda 环境 `cv_hw3_task2`。
+所有 `scripts/*.sh` 会自动激活 `.venv` 或 conda 环境 `task2`。
 
 ---
 
@@ -224,4 +224,4 @@ bash scripts/diagnose.sh ABC_fair
 重新训练前：`rm -rf outputs/train_b`
 
 **`ModuleNotFoundError: lerobot`**  
-重新执行环境配置并 ` activcondaate cv_hw3_task2` 或 `source .venv/bin/activate`
+重新执行环境配置并 `conda activate task2` 或 `source .venv/bin/activate`

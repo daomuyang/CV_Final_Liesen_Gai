@@ -14,7 +14,7 @@ if command -v conda >/dev/null 2>&1; then
   conda env update -f environment.yml --prune -y || conda env create -f environment.yml -y
   # shellcheck disable=SC1091
   source "$(conda info --base)/etc/profile.d/conda.sh"
-  conda activate cv_hw3_task2
+  conda activate task2
 else
   echo "Conda not found; falling back to venv + pip"
   python3 -m venv .venv

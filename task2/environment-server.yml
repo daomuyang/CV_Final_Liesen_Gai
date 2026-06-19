@@ -1,4 +1,5 @@
-name: cv_hw3_task2_server
+# 同 environment.yml（环境名：task2）
+name: task2
 channels:
   - pytorch
   - nvidia
