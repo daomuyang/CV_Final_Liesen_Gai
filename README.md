@@ -17,6 +17,7 @@
 cv_final/
 ├── README.md                    # 本文档
 ├── report.tex                   # 课程报告tex文件
+├── references.bib               # 参考文献
 ├── task1/                       # 题目一代码与日志
 │   ├── environment.yml
 │   ├── scripts/
