@@ -23,7 +23,7 @@
 ```
 task1/
 ├── README.md
-├── environment.yml              # Conda 环境（cvpj1）
+├── environment.yml              # Conda 环境（task1）
 ├── patches/                     # 对第三方库的补丁
 │   ├── 2d-gaussian-splatting-alpha-mask.patch
 │   └── Magic123-wandb.patch
@@ -100,7 +100,7 @@ submission_assets/
 # 1. 克隆 GitHub 仓库
 cd task1
 bash scripts/setup_server.sh
-conda activate cvpj1
+conda activate task1
 
 # 2. 下载百度网盘，解压到 task1/ 下：
 #    submission_assets/  → task1/submission_assets/

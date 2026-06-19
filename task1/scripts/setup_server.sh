@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ENV_FILE="${ROOT_DIR}/environment.yml"
-ENV_NAME="${CONDA_ENV_NAME:-cvpj1}"
+ENV_NAME="${CONDA_ENV_NAME:-task1}"
 
 if ! command -v conda >/dev/null 2>&1; then
   echo "conda not found. Install Miniconda first." >&2

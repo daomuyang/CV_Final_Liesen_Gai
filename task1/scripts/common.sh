@@ -11,7 +11,7 @@ DATASET_ROOT="${TASK1_ROOT}/submission_assets"
 TOOLS_DIR="${TASK1_ROOT}/scripts/tools"
 PATCHES_DIR="${TASK1_ROOT}/patches"
 
-CONDA_ENV_NAME="${CONDA_ENV_NAME:-cvpj1}"
+CONDA_ENV_NAME="${CONDA_ENV_NAME:-task1}"
 
 activate_conda_env() {
   # shellcheck disable=SC1091

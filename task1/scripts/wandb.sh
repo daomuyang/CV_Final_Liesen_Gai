@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 WANDB_ENTITY="${WANDB_ENTITY:-fudan-university-CS50028}"
-WANDB_PROJECT="${WANDB_PROJECT:-final-project}"
+WANDB_PROJECT="${WANDB_PROJECT:-cv_final_task1}"
 WANDB_ENABLE="${WANDB_ENABLE:-1}"
 WANDB_MODE="${WANDB_MODE:-offline}"
 WANDB_DIR="${WANDB_DIR:-${PROJECT_ROOT}/outputs/wandb}"
