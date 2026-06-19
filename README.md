@@ -16,9 +16,7 @@
 ```
 cv_final/
 ├── README.md                    # 本文档
-├── report.tex / report.pdf      # 课程报告
-├── report_task1_figures/        # 报告插图（题目一）
-├── report_task2_figures/        # 报告插图（题目二）
+├── report.tex                   # 课程报告tex文件
 ├── task1/                       # 题目一代码与日志
 │   ├── environment.yml
 │   ├── scripts/
